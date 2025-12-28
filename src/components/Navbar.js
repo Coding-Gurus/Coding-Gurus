@@ -32,7 +32,7 @@ export default function Navbar() {
             <Link href="/" className="flex items-center gap-3 group">
               <div className="relative w-10 h-10">
                 <img
-                  src="/CG-logo.png"
+                  src="/CG-Logo.png"
                   alt="Coding Gurus Logo"
                   className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300"
                   onError={(e) => {

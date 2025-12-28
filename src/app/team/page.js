@@ -4,7 +4,7 @@ export default function Team() {
   const founder = {
     name: "Darshan Khapekar",
     role: "Founder & CEO",
-    image: "/team/darshan.jpg",
+    image: null,
     bio: "Visionary leader driving innovation in tech solutions",
     achievements: [
       "SIH 2024 & 2025 Winner",
@@ -17,7 +17,7 @@ export default function Team() {
     {
       name: "Shravani Rasam",
       role: "Co-Founder & CTO",
-      image: "/team/shravani.jpg",
+      image: null,
       bio: "Tech architect building scalable solutions",
       achievements: [
         "Full-Stack Development Expert",
@@ -28,7 +28,7 @@ export default function Team() {
     {
       name: "Pranav Pol",
       role: "Co-Founder & COO",
-      image: "/team/pranav.jpg",
+      image: null,
       bio: "Operations mastermind ensuring flawless execution",
       achievements: [
         "Project Management Pro",
