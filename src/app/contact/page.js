@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import ConsultationModal from "@/components/ConsultationModal";
 
 const metadata = {
   title: "Contact Us | Coding Gurus",
@@ -19,25 +20,79 @@ export default function Contact() {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [isConsultationModalOpen, setIsConsultationModalOpen] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Here you would integrate with your email service (EmailJS, FormSpree, etc.)
-    console.log("Form submitted:", formData);
-    setSubmitted(true);
-
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setFormData({
-        name: "",
-        company: "",
-        email: "",
-        projectIdea: "",
-        budget: "",
-        timeline: "",
+    
+    try {
+      console.log('Submitting form to Telegram...');
+      
+      // Send to Telegram
+      const response = await fetch('/api/telegram', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          type: 'contact_form',
+          ...formData,
+        }),
       });
-      setSubmitted(false);
-    }, 3000);
+
+      const responseData = await response.json();
+      console.log('Telegram API response:', responseData);
+
+      if (response.ok) {
+        console.log('Form submitted and sent to Telegram successfully');
+        setSubmitted(true);
+
+        // Reset form after 3 seconds
+        setTimeout(() => {
+          setFormData({
+            name: "",
+            company: "",
+            email: "",
+            projectIdea: "",
+            budget: "",
+            timeline: "",
+          });
+          setSubmitted(false);
+        }, 3000);
+      } else {
+        console.error('Failed to send to Telegram:', responseData);
+        // Still show success to user but log the error
+        alert(`Form submitted but notification failed: ${responseData.details || 'Unknown error'}. Please contact us directly.`);
+        setSubmitted(true);
+        setTimeout(() => {
+          setFormData({
+            name: "",
+            company: "",
+            email: "",
+            projectIdea: "",
+            budget: "",
+            timeline: "",
+          });
+          setSubmitted(false);
+        }, 3000);
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('Form submission error. Please try contacting us directly via email.');
+      // Still show success to user
+      setSubmitted(true);
+      setTimeout(() => {
+        setFormData({
+          name: "",
+          company: "",
+          email: "",
+          projectIdea: "",
+          budget: "",
+          timeline: "",
+        });
+        setSubmitted(false);
+      }, 3000);
+    }
   };
 
   const handleChange = (e) => {
@@ -49,6 +104,12 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen bg-gradient-dark overflow-hidden">
+      <ConsultationModal 
+        isOpen={isConsultationModalOpen} 
+        onClose={() => setIsConsultationModalOpen(false)}
+        sourcePage="Contact Page"
+      />
+      
       {/* Hero Section */}
       <section className="relative py-20 overflow-hidden">
         {/* Animated Background */}
@@ -247,6 +308,20 @@ export default function Contact() {
                       <a
                         href="mailto:contact@codinggurus.in"
                         className="text-blue-400 hover:text-blue-300 transition-colors"
+                        onClick={async () => {
+                          try {
+                            await fetch('/api/telegram', {
+                              method: 'POST',
+                              headers: { 'Content-Type': 'application/json' },
+                              body: JSON.stringify({
+                                type: 'email_click',
+                                page: 'Contact Page',
+                              }),
+                            });
+                          } catch (error) {
+                            console.error('Error notifying Telegram:', error);
+                          }
+                        }}
                       >
                         contact@codinggurus.in
                       </a>
@@ -270,6 +345,10 @@ export default function Contact() {
                       <a
                         href="#"
                         className="text-purple-400 hover:text-purple-300 transition-colors"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setIsConsultationModalOpen(true);
+                        }}
                       >
                         Book a free consultation call
                       </a>

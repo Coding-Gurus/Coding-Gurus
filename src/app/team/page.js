@@ -4,12 +4,12 @@ export default function Team() {
   const founder = {
     name: "Darshan Khapekar",
     role: "Founder & CEO",
-    image: null,
+    image: "/darshan.png",
     bio: "Visionary leader driving innovation in tech solutions",
     achievements: [
+      "7x Hackathon Winner",
+      "3+ Years Teaching Experience",
       "SIH 2024 & 2025 Winner",
-      "Mumbai Hacks 2025 Champion",
-      "10+ Successful Projects Delivered",
     ],
   };
 
@@ -17,12 +17,12 @@ export default function Team() {
     {
       name: "Shravani Rasam",
       role: "Co-Founder & CTO",
-      image: null,
+      image: "/shravani.png",
       bio: "Tech architect building scalable solutions",
       achievements: [
+        "6x Hackathon Winner",
         "Full-Stack Development Expert",
         "AI/ML Specialist",
-        "Blockchain Enthusiast",
       ],
     },
     {
@@ -31,9 +31,9 @@ export default function Team() {
       image: null,
       bio: "Operations mastermind ensuring flawless execution",
       achievements: [
+        "4x Hackathon Winner",
         "Project Management Pro",
         "Client Relations Expert",
-        "Agile Methodology Specialist",
       ],
     },
   ];
@@ -105,7 +105,7 @@ export default function Team() {
                 <div className="relative z-10">
                   {/* Image */}
                   <div className="relative mb-6">
-                    <div className="w-40 h-40 mx-auto rounded-full bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 p-1.5 animate-glow group-hover:scale-110 transition-transform duration-700">
+                    <div className="w-56 h-56 mx-auto rounded-full bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 p-1.5 animate-glow group-hover:scale-110 transition-transform duration-700">
                       <div className="w-full h-full rounded-full bg-zinc-900 flex items-center justify-center overflow-hidden">
                         <img
                           src={founder.image}
@@ -198,7 +198,7 @@ export default function Team() {
                   <div className="relative z-10">
                     {/* Image */}
                     <div className="relative mb-5">
-                      <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-br from-purple-500 to-pink-500 p-1 group-hover:scale-110 transition-transform duration-500 neon-glow">
+                      <div className="w-48 h-48 mx-auto rounded-full bg-gradient-to-br from-purple-500 to-pink-500 p-1 group-hover:scale-110 transition-transform duration-500 neon-glow">
                         <div className="w-full h-full rounded-full bg-zinc-900 flex items-center justify-center overflow-hidden">
                           <img
                             src={member.image}
